@@ -1,3 +1,9 @@
 {
-    
+    "name": "boucher1979/myaliens-api",
+    "description": "Backend of myaliens system",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
 }
