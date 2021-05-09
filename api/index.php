@@ -1,18 +1,36 @@
 <?php
 
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
+
+use App\common\Controller;
+
 require '../app/bootstrap.php';
 
-echo 'This is the root index file';
+$app = AppFactory::create();
 
-class RootController extends App\common\Controller
-{
-    function __construct()
-    {
-        parent::__construct();
-        $this->log->info('Root controller instantiated');
-    }   
-    // TODO
-}
+$app->setBasePath('/api'); // Because we are working within a folder
 
-$controller = new RootController();
+$app->get('/', function (Request $request, Response $response, $args) {
+    $response->getBody()->write("Welcome to the Alien api");
+    return $response;
+});
+
+$app->get('/alien/{id}', function (Request $request, Response $response, $args) {
+    
+    $controller = new Controller(); // Initialises logging and environment variables
+    $dbCon = new App\common\ApiDb();
+
+    $alienService = new App\Services\Alien($dbCon, $controller->GetLog());
+    
+    $alien = $alienService->GetAlien($args['id']);
+    $payload = json_encode($alien);
+    $response->getBody()->write($payload);
+
+    return $response->withHeader('Content-Type','application/json');
+});
+
+$app->run();
+
 ?>

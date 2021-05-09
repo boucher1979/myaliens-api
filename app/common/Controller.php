@@ -20,5 +20,10 @@ class Controller extends Base
         $this->log->pushHandler(new StreamHandler($_ENV['APILOG_PATH'], Logger::WARNING));
         $this->log->pushHandler(new StreamHandler($_ENV['APILOG_PATH'], Logger::INFO));
     }
+
+    function GetLog()
+    {
+        return $this->log;
+    }
 }
 ?>
