@@ -1,0 +1,26 @@
+Notes about working apache set up
+
+<Directory "D:/myaliens/myaliens-api/api">
+	Require all granted
+	RewriteEngine on
+
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME}\.php -f
+	RewriteRule ^(.*)$ $1.php
+</Directory>
+
+# Set up a url for the myaliens api
+Alias "/myaliens" "D:/myaliens/myaliens-api/api"
+
+<Directory "D:/myaliens/myaliens-api/api/apitest">
+	Require all granted
+	RewriteEngine on
+	AllowOverride All
+	#RewriteCond %{ENV:REDIRECT_STATUS} ^$
+	RewriteRule ^ index.php [QSA,L]
+	RewriteRule ^$ apitest/ [L]
+	RewriteRule (.*) apitest/$1 [L]
+</Directory>
+
+# Set up a url for the myaliens api
+Alias "/apitest" "D:/myaliens/myaliens-api/api/apitest"
