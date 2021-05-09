@@ -45,7 +45,7 @@ class Db
         }
 
         $call->execute();
-        $callResult = $call->fetchAll();
+        $callResult = $call->fetch();
 
         if ($callResult == null)
         {
