@@ -26,7 +26,7 @@ class Db
         }
 
         $call->execute();
-        $callResult = $call->fetchAll();
+        $callResult = $call->fetchAll(\PDO::FETCH_ASSOC);
 
         if ($callResult == null)
         {
@@ -45,7 +45,7 @@ class Db
         }
 
         $call->execute();
-        $callResult = $call->fetch();
+        $callResult = $call->fetch(\PDO::FETCH_ASSOC);
 
         if ($callResult == null)
         {

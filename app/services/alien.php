@@ -19,7 +19,7 @@ class Alien
     {
         try
         {
-            $sql = "SELECT * FROM alien WHERE id = :id";
+            $sql = "CALL alien_get(:id)";
             $params = array("id"=> $id);
             $result = $this->dbCon->GetRow($sql,$params);
 

@@ -17,7 +17,7 @@ $app->get('/', function (Request $request, Response $response, $args) {
     return $response;
 });
 
-$app->get('/alien/{id}', function (Request $request, Response $response, $args) {
+$app->get('/aliens/{id}', function (Request $request, Response $response, $args) {
     
     $controller = new Controller(); // Initialises logging and environment variables
     $dbCon = new App\common\ApiDb();
